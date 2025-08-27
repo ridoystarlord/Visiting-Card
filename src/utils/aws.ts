@@ -2,8 +2,8 @@ import {
   GetObjectCommand,
   PutObjectCommand,
   S3Client,
-} from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const s3Client = new S3Client({
   region: process.env.S3_AWS_REGION,
@@ -25,10 +25,9 @@ export const getObjectURL = async (key: string) => {
 export const putObjectURL = async (
   extension: string,
   contentType: string,
-  folderName: string,
-  userId: string,
+  folderName: string
 ) => {
-  const key = `${folderName}/${userId}-${Date.now()}.${extension}`;
+  const key = `${folderName}/-${Date.now()}.${extension}`;
   const command = new PutObjectCommand({
     Bucket: process.env.S3_BUCKET_NAME,
     Key: `${key}`,

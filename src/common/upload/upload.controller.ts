@@ -21,10 +21,7 @@ export class UploadController {
 
   @Post("new")
   async CreateUploadUrl(@Body() createUploadDto: CreateUploadDto, @Req() req) {
-    const data = await this.uploadService.createUploadUrl(
-      createUploadDto,
-      req?.user?.id
-    );
+    const data = await this.uploadService.createUploadUrl(createUploadDto);
     return {
       success: true,
       message: "Upload URL Generated Successfully",
