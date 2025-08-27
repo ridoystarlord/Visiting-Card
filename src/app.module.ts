@@ -18,7 +18,6 @@ import { ResponseInterceptor } from "./common/interceptor/ResponseInterceptor";
 import { MetricsModule } from "./common/metrics/metrics.module";
 import { MetricsMiddleware } from "./common/middleware/metrics.middleware";
 import { UploadModule } from "./common/upload/upload.module";
-import { CustomCacheService } from "./utils/cache.service";
 import { ExtractContactModule } from "./models/extract-contact/extract-contact.module";
 import { TextractService } from "./common/textract/textract.service";
 
@@ -42,7 +41,6 @@ import { TextractService } from "./common/textract/textract.service";
   providers: [
     AppService,
     TextractService,
-    CustomCacheService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

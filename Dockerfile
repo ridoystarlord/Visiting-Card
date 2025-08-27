@@ -76,7 +76,7 @@ RUN chown -R nestjs:nodejs /app
 USER nestjs
 
 # Expose port and start application
-EXPOSE 5000
+EXPOSE 6001
 # CMD ["node", "dist/main"]
 # CMD ["pm2-runtime", "start", "dist/main.js", "-i", "max"]
 COPY pm2.config.js ./

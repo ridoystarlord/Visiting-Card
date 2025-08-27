@@ -1,33 +1,14 @@
 services:
   app:
-    image: ridoystarlord/accounting-pos-backend
-    container_name: account-pos-backend
+    image: ridoystarlord/visiting-card-backend
+    container_name: visiting-card-backend
     restart: always
     ports:
-      - "5000:5000"
+      - "6001:6001"
     env_file:
       - .env
-    volumes:
-      - ./logs:/app/logs
-    depends_on:
-      - redis
     networks:
       - visiting-card-network
-
-  redis:
-    image: redis:latest
-    container_name: redis
-    restart: always
-    ports:
-      - "6379:6379"
-    command: redis-server --appendonly yes # Optional: For persistence
-    volumes:
-      - redis_data:/data
-    networks:
-      - visiting-card-network
-
-volumes:
-  redis_data:
 
 networks:
   visiting-card-network:
