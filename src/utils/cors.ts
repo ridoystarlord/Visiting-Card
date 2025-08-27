@@ -3,6 +3,7 @@ const allowedOrigins = [
   "http://localhost:5001",
   "http://localhost:6001",
   "https://visiting.ridoy.dev",
+  "https://visitr-card-hub.lovable.app",
 ];
 
 const corsOptions = {

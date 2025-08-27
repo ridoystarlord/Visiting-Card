@@ -70,7 +70,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          source: "./backend.conf"
+          source: "./visiting-backend.conf"
           target: "/etc/nginx/conf.d/"
 
       - name: Deploy and ensure HTTPS
