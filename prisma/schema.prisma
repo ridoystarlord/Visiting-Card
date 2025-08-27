@@ -1,0 +1,40 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ExtractedContact {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(0)
+  name      String?
+  email     String?  @unique
+  phone     String?
+  company   String?
+  jobTitle  String?
+  website   String?
+  source    String?
+
+  @@index([email, phone])
+  @@map("ExtractedContacts")
+}
+
+model RequestLog {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime @default(now()) @updatedAt @db.Timestamp(0)
+  method        String
+  url           String
+  ip            String?
+  userAgent     String?
+  requestBody   Json?
+  requestParams Json?
+
+  @@index([method])
+  @@map("RequestLogs")
+}
