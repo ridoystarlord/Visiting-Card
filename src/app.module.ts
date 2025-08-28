@@ -20,6 +20,7 @@ import { MetricsMiddleware } from "./common/middleware/metrics.middleware";
 import { UploadModule } from "./common/upload/upload.module";
 import { ExtractContactModule } from "./models/extract-contact/extract-contact.module";
 import { TextractService } from "./common/textract/textract.service";
+import { GoogleVisionService } from "./common/google-vision/google-vision.service";
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { TextractService } from "./common/textract/textract.service";
   providers: [
     AppService,
     TextractService,
+    GoogleVisionService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

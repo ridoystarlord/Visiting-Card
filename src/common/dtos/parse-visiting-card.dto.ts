@@ -6,4 +6,9 @@ export class ParseVisitingCardDto {
   @IsString()
   @IsOptional()
   imageUrl?: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  provider?: string;
 }

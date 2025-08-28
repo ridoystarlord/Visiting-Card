@@ -2,6 +2,11 @@
 
 ```bash
 $ yarn install
+
+## Environment Variables
+
+See [ENVIRONMENT.md](./ENVIRONMENT.md) for required environment variables and example setup.
+
 ```
 
 ## Running the app
@@ -9,17 +14,4 @@ $ yarn install
 ```bash
 # development
 $ yarn run dev
-```
-
-## Test
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
 ```
