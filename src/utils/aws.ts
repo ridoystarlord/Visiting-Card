@@ -27,7 +27,7 @@ export const putObjectURL = async (
   contentType: string,
   folderName: string
 ) => {
-  const key = `${folderName}/-${Date.now()}.${extension}`;
+  const key = `${folderName}/${Date.now()}.${extension}`;
   const command = new PutObjectCommand({
     Bucket: process.env.S3_BUCKET_NAME,
     Key: `${key}`,
