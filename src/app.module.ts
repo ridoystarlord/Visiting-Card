@@ -42,7 +42,6 @@ import { GoogleVisionService } from "./common/google-vision/google-vision.servic
   providers: [
     AppService,
     TextractService,
-    GoogleVisionService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
