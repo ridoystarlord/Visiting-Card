@@ -1,10 +1,11 @@
 import vision from "@google-cloud/vision";
 import {
   AnalyzeDocumentCommand,
+  BadDocumentException,
   FeatureType,
   TextractClient,
 } from "@aws-sdk/client-textract";
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { DatabaseService } from "../../common/database/database.service";
 
@@ -69,13 +70,21 @@ export class TextractService {
 
     // Parse Textract result
     const extracted = this.parseTextract(textractResult);
-    // Save to DB
-    return this.prisma.extractedContact.create({
-      data: {
-        ...extracted,
-        source: imageUrl,
-      },
-    });
+    if (extracted) {
+      const isEmailExists = await this.prisma.extractedContact.findUnique({
+        where: { email: extracted.email },
+      });
+      if (isEmailExists) {
+        throw new BadRequestException("Email already exists");
+      }
+      // Save to DB
+      return this.prisma.extractedContact.create({
+        data: {
+          ...extracted,
+          source: imageUrl,
+        },
+      });
+    }
   }
 
   private async downloadImage(url: string): Promise<Buffer> {

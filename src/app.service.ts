@@ -16,9 +16,11 @@ export class AppService {
     if (!imageUrl) return null;
     // Default: AWS Textract
     const data = await this.textractService.extractAndSave(imageUrl);
-    const baseUrl = process.env.BACKEND_URL || "http://localhost:5001";
-    // Send to CRM endpoint
-    await axios.post(`${baseUrl}/api/v1/crm-sync`, data);
-    return data;
+    if (data) {
+      const baseUrl = process.env.BACKEND_URL || "http://localhost:5001";
+      // Send to CRM endpoint
+      await axios.post(`${baseUrl}/api/v1/crm-sync`, data);
+      return data;
+    }
   }
 }
