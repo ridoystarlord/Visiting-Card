@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { TextractService } from "./common/textract/textract.service";
 import { GoogleVisionService } from "./common/google-vision/google-vision.service";
+import axios from "axios";
 
 @Injectable()
 export class AppService {
@@ -24,7 +25,11 @@ export class AppService {
       return this.googleVisionService.extractTextFromImage(imageBuffer);
     } else {
       // Default: AWS Textract
-      return this.textractService.extractAndSave(imageUrl);
+      const data = await this.textractService.extractAndSave(imageUrl);
+      const baseUrl = process.env.BACKEND_URL || "http://localhost:5001";
+      // Send to CRM endpoint
+      await axios.post(`${baseUrl}/api/v1/crm-sync`, data);
+      return data;
     }
   }
 }

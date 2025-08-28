@@ -9,9 +9,22 @@ import { ParseVisitingCardDto } from "./common/dtos/parse-visiting-card.dto";
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Post("crm-sync")
+  async crmSync(@Body() record: any) {
+    // For mock: just log and return the record
+    // console.log("CRM Sync received:", record);
+    return {
+      success: true,
+      message: "CRM sync received",
+      data: record,
+      statusCode: HttpStatus.OK,
+    };
+  }
+
   @Post("parse-visiting-card")
   async ParseVisitingCard(@Body() parseDataDto: ParseVisitingCardDto) {
     await this.appService.parseVisitingCard(parseDataDto.imageUrl);
+
     return {
       success: true,
       message: "Parse Visiting Card Successfully",
